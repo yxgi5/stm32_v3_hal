@@ -4,7 +4,7 @@
  *      *** Do not modify ! ***
  *
  * Project: 'stm32_v3_hal' 
- * Target:  'stm32_v3_hal_inram' 
+ * Target:  'stm32_v3_hal_extsram' 
  */
 
 #ifndef RTE_COMPONENTS_H
