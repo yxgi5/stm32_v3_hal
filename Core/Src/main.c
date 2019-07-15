@@ -86,53 +86,53 @@ int main(void)
     if (bsp_CheckTimer(0))
     {
       /* 每隔100ms 进来一次 */
-      bsp_LedToggle(1);
+      bsp_LedToggle(LED1);
     }
 
     /* 判断软件定时器1超时 */
     if (bsp_CheckTimer(1))
     {
       /* 每隔100ms 进来一次 */
-      bsp_LedToggle(2);
+      bsp_LedToggle(LED2);
     }
 
     /* 判断软件定时器2是否超时 */
     if (bsp_CheckTimer(2))
     {
       /* 单次模式，按下K1按键后，定时1秒进入 */
-      bsp_LedToggle(3);
+      bsp_LedToggle(LED3);
     }
 
     /* 判断软件定时器3是否超时 */
     if (bsp_CheckTimer(3))
     {
       /* 单次模式，按下K2按键后，定时2秒进入 */
-      bsp_LedToggle(4);
+      bsp_LedToggle(LED4);
     }
 
 
-//    /* 按键滤波和检测由后台systick中断服务程序实现，我们只需要调用bsp_GetKey读取键值即可。 */
-//    ucKeyCode = bsp_GetKey(); /* 读取键值, 无键按下时返回 KEY_NONE = 0 */
-//    if (ucKeyCode != KEY_NONE)
-//    {
-//      switch (ucKeyCode)
-//      {
-//        case KEY_DOWN_K1:     /* K1键按下，启动软件定时2，单次模式，定时0.5时间 */
-//          printf("K1键按下\r\n");
-//          bsp_StartTimer(2, 500);
-//          break;
-//
-//        case KEY_DOWN_K2:     /* K2键按下，启动软件定时3，单次模式，定时1s时间  */
-//          printf("K2键按下\r\n");
-//          bsp_StartTimer(3, 1000);
-//          break;
-//
-//        default:
-//          /* 其它的键值不处理 */
-//          break;
-//      }
-//
-//    }
+    /* 按键滤波和检测由后台systick中断服务程序实现，我们只需要调用bsp_GetKey读取键值即可。 */
+    ucKeyCode = bsp_GetKey(); /* 读取键值, 无键按下时返回 KEY_NONE = 0 */
+    if (ucKeyCode != KEY_NONE)
+    {
+      switch (ucKeyCode)
+      {
+        case KEY_DOWN_K1:     /* K1键按下，启动软件定时2，单次模式，定时0.5时间 */
+          printf("K1键按下\r\n");
+          bsp_StartTimer(2, 500);
+          break;
+
+        case KEY_DOWN_K2:     /* K2键按下，启动软件定时3，单次模式，定时1s时间  */
+          printf("K2键按下\r\n");
+          bsp_StartTimer(3, 1000);
+          break;
+
+        default:
+          /* 其它的键值不处理 */
+          break;
+      }
+
+    }
   }
   /* USER CODE END 3 */
 }
