@@ -67,43 +67,72 @@ static void MX_RTC_Init(void);
   */
 int main(void)
 {
+  uint8_t ucKeyCode;    /* 按键代码 */
+
   bsp_Init();
 
-//  GPIO_InitTypeDef  gpio_initstruct;
-//  __HAL_RCC_GPIOF_CLK_ENABLE();
-//  /* Configure the GPIO_LED pin */
-//  gpio_initstruct.Pin = GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9;
-//  gpio_initstruct.Mode = GPIO_MODE_OUTPUT_PP;
-//  gpio_initstruct.Pull = GPIO_PULLUP;
-//  gpio_initstruct.Speed = GPIO_SPEED_FREQ_HIGH;
-//
-//  HAL_GPIO_Init(GPIOF, &gpio_initstruct);
-//
-//  /* By default, turn off LED */
-//  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_6, GPIO_PIN_SET);
-//  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_7, GPIO_PIN_SET);
-//  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_SET);
-//  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);
+//  PrintfLogo(); /* 打印例程名称和版本等信息 */
+//  PrintfHelp(); /* 打印操作提示 */
 
+  bsp_StartAutoTimer(0, 100); /* 启动1个100ms的自动重装的定时器，软件定时器0 */
+  bsp_StartAutoTimer(1, 100); /* 启动1个100ms的自动重装的定时器，软件定时器1 */
+
+  /* 进入主程序循环体 */
   while (1)
   {
-//    HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_6);
-////    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_6, GPIO_PIN_RESET);
-//    /* Insert delay 100 ms */
-    bsp_LedToggle(LED1);
-    HAL_Delay(100);
-//    HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_7);
-//    /* Insert delay 100 ms */
-    bsp_LedToggle(LED2);
-    HAL_Delay(100);
-//    HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_8);
-//    /* Insert delay 100 ms */
-    bsp_LedToggle(LED3);
-    HAL_Delay(100);
-//    HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_9);
-//    /* Insert delay 100 ms */
-    bsp_LedToggle(LED4);
-    HAL_Delay(100);
+    bsp_Idle();   /* 这个函数在bsp.c文件。用户可以修改这个函数实现CPU休眠和喂狗 */
+
+    /* 判断软件定时器0是否超时 */
+    if (bsp_CheckTimer(0))
+    {
+      /* 每隔100ms 进来一次 */
+      bsp_LedToggle(1);
+    }
+
+    /* 判断软件定时器1超时 */
+    if (bsp_CheckTimer(1))
+    {
+      /* 每隔100ms 进来一次 */
+      bsp_LedToggle(2);
+    }
+
+    /* 判断软件定时器2是否超时 */
+    if (bsp_CheckTimer(2))
+    {
+      /* 单次模式，按下K1按键后，定时1秒进入 */
+      bsp_LedToggle(3);
+    }
+
+    /* 判断软件定时器3是否超时 */
+    if (bsp_CheckTimer(3))
+    {
+      /* 单次模式，按下K2按键后，定时2秒进入 */
+      bsp_LedToggle(4);
+    }
+
+
+//    /* 按键滤波和检测由后台systick中断服务程序实现，我们只需要调用bsp_GetKey读取键值即可。 */
+//    ucKeyCode = bsp_GetKey(); /* 读取键值, 无键按下时返回 KEY_NONE = 0 */
+//    if (ucKeyCode != KEY_NONE)
+//    {
+//      switch (ucKeyCode)
+//      {
+//        case KEY_DOWN_K1:     /* K1键按下，启动软件定时2，单次模式，定时0.5时间 */
+//          printf("K1键按下\r\n");
+//          bsp_StartTimer(2, 500);
+//          break;
+//
+//        case KEY_DOWN_K2:     /* K2键按下，启动软件定时3，单次模式，定时1s时间  */
+//          printf("K2键按下\r\n");
+//          bsp_StartTimer(3, 1000);
+//          break;
+//
+//        default:
+//          /* 其它的键值不处理 */
+//          break;
+//      }
+//
+//    }
   }
   /* USER CODE END 3 */
 }
