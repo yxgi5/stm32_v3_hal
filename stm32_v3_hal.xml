@@ -13,7 +13,6 @@
   <board id="stm32_v3_hal">
     <name>stm32_v3_hal</name>
     <dbgIF>SWD</dbgIF>
-    <dbgIF>JTAG</dbgIF>
     <dbgDEV>ST-Link</dbgDEV>
     <mcuId>stm32f103zetx</mcuId>
   </board>

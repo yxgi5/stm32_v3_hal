@@ -19,7 +19,7 @@
 <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.gdbServerOther" value="-s /opt/openocd/0.10.0-12-20190422-2015/scripts -f interface/jlink.cfg -c 'transport select swd' -f target/stm32f1x.cfg"/>
 <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.gdbServerTclPortNumber" value="6666"/>
 <intAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.gdbServerTelnetPortNumber" value="4444"/>
-<stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.otherInitCommands" value="monitor reset&#10;&#10;monitor reg sp 0x20000000&#10;monitor reg pc 0x20000004&#10;monitor mww 0xE000ED08 0x20000000&#10;monitor halt"/>
+<stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.otherInitCommands" value="#monitor reset&#10;#monitor sleep 100&#10;monitor reset&#10;monitor reg sp 0x20000000&#10;monitor reg pc 0x20000004&#10;monitor mww 0xE000ED08 0x20000000&#10;monitor halt"/>
 <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.otherRunCommands" value="#monitor reg sp 0x20000000&#10;#monitor reg pc 0x20000004&#10;#break ResetHandler&#10;#break main&#13;&#10;#continue"/>
 <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.secondResetType" value="halt"/>
 <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.svdPath" value="/opt/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.ide_2.9.1.201905031422/resources/cmsis/STMicroelectronics_CMSIS_SVD/STM32F103.svd"/>
