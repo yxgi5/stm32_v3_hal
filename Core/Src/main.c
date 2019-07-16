@@ -38,7 +38,9 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+#define EXAMPLE_NAME  "V3-Uart"
+#define EXAMPLE_DATE  "2019-07-16"
+#define DEMO_VER    "1.0"
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -52,6 +54,8 @@ RTC_HandleTypeDef hrtc;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_RTC_Init(void);
+static void PrintfLogo(void);
+static void PrintfHelp(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -71,8 +75,8 @@ int main(void)
 
   bsp_Init();
 
-//  PrintfLogo(); /* 打印例程名称和版本等信息 */
-//  PrintfHelp(); /* 打印操作提示 */
+  PrintfLogo(); /* 打印例程名称和版本等信息 */
+  PrintfHelp(); /* 打印操作提示 */
 
   bsp_StartAutoTimer(0, 100); /* 启动1个100ms的自动重装的定时器，软件定时器0 */
   bsp_StartAutoTimer(1, 100); /* 启动1个100ms的自动重装的定时器，软件定时器1 */
@@ -151,6 +155,62 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+/*
+*********************************************************************************************************
+* 函 数 名: PrintfHelp
+* 功能说明: 打印操作提示
+* 形    参: 无
+* 返 回 值: 无
+*********************************************************************************************************
+*/
+static void PrintfHelp(void)
+{
+  printf("操作提示:\r\n");
+  printf("1. 启动一个自动重装软件定时器，每100ms翻转一次LED1和LED2\r\n");
+  printf("2. 再启动一个自动重装软件定时器，每500ms翻转一次LED3和LED4\r\n");
+}
+
+/*
+*********************************************************************************************************
+* 函 数 名: PrintfLogo
+* 功能说明: 打印例程名称和例程发布日期, 接上串口线后，打开PC机的超级终端软件可以观察结果
+* 形    参: 无
+* 返 回 值: 无
+*********************************************************************************************************
+*/
+static void PrintfLogo(void)
+{
+  printf("*************************************************************\n\r");
+
+  /* 检测CPU ID */
+  {
+    uint32_t CPU_Sn0, CPU_Sn1, CPU_Sn2;
+
+    CPU_Sn0 = *(__IO uint32_t*)(0x1FFFF7E8);
+    CPU_Sn1 = *(__IO uint32_t*)(0x1FFFF7E8 + 4);
+    CPU_Sn2 = *(__IO uint32_t*)(0x1FFFF7E8 + 8);
+
+    printf("\r\nCPU : STM32H743XIH6, BGA240, 主频: %dMHz\r\n", SystemCoreClock / 1000000);
+    printf("UID = %08X %08X %08X\n\r", CPU_Sn2, CPU_Sn1, CPU_Sn0);
+  }
+
+  printf("\n\r");
+  printf("*************************************************************\n\r");
+  printf("* 例程名称   : %s\r\n", EXAMPLE_NAME);  /* 打印例程名称 */
+  printf("* 例程版本   : %s\r\n", DEMO_VER);    /* 打印例程版本 */
+  printf("* 发布日期   : %s\r\n", EXAMPLE_DATE);  /* 打印例程日期 */
+
+  /* 打印ST的HAL库版本 */
+  printf("* HAL库版本  : V1.3.0 (STM32H7xx HAL Driver)\r\n");
+  printf("* \r\n"); /* 打印一行空格 */
+  printf("* QQ    : 1295744630 \r\n");
+  printf("* 旺旺  : armfly\r\n");
+  printf("* Email : armfly@qq.com \r\n");
+  printf("* 微信公众号: armfly_com \r\n");
+  printf("* 淘宝店: armfly.taobao.com\r\n");
+  printf("* Copyright www.armfly.com 安富莱电子\r\n");
+  printf("*************************************************************\n\r");
+}
 
 /* USER CODE END 4 */
 
