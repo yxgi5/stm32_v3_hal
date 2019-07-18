@@ -84,59 +84,22 @@ int main(void)
   /* 进入主程序循环体 */
   while (1)
   {
-    bsp_Idle();   /* 这个函数在bsp.c文件。用户可以修改这个函数实现CPU休眠和喂狗 */
-
-    /* 判断软件定时器0是否超时 */
-    if (bsp_CheckTimer(0))
-    {
-      /* 每隔100ms 进来一次 */
-      bsp_LedToggle(LED1);
-    }
-
-    /* 判断软件定时器1超时 */
-    if (bsp_CheckTimer(1))
-    {
-      /* 每隔100ms 进来一次 */
-      bsp_LedToggle(LED2);
-    }
-
-    /* 判断软件定时器2是否超时 */
-    if (bsp_CheckTimer(2))
-    {
-      /* 单次模式，按下K1按键后，定时1秒进入 */
-      bsp_LedToggle(LED3);
-    }
-
-    /* 判断软件定时器3是否超时 */
-    if (bsp_CheckTimer(3))
-    {
-      /* 单次模式，按下K2按键后，定时2秒进入 */
-      bsp_LedToggle(LED4);
-    }
+    uint8_t ctrl=1;
+      /* USER CODE END WHILE */
+    uint8_t tmp[40]={12,2,3,4,5,6,7,8,9,10,\
+    11,12,13,14,15,16,17,18,19,20,21,22,\
+    23,24,25,26,27,28,29,30,31,32,33,34,\
+    35,36,37,38,39,40};
+  //  ee_WriteBytes(&I2c1Handle, tmp,0,40);
 
 
-    /* 按键滤波和检测由后台systick中断服务程序实现，我们只需要调用bsp_GetKey读取键值即可。 */
-    ucKeyCode = bsp_GetKey(); /* 读取键值, 无键按下时返回 KEY_NONE = 0 */
-    if (ucKeyCode != KEY_NONE)
-    {
-      switch (ucKeyCode)
-      {
-        case KEY_DOWN_K1:     /* K1键按下，启动软件定时2，单次模式，定时0.5时间 */
-          printf("K1键按下\r\n");
-          bsp_StartTimer(2, 500);
-          break;
+    uint8_t tmp1[120]={0};
 
-        case KEY_DOWN_K2:     /* K2键按下，启动软件定时3，单次模式，定时1s时间  */
-          printf("K2键按下\r\n");
-          bsp_StartTimer(3, 1000);
-          break;
+    ee_WriteBytes(&I2c1Handle, tmp, 78, sizeof(tmp));
 
-        default:
-          /* 其它的键值不处理 */
-          break;
-      }
-
-    }
+    HAL_Delay(100);
+    ee_ReadBytes(&I2c1Handle, tmp1, 0, sizeof(tmp1));
+    HAL_Delay(100);
   }
   /* USER CODE END 3 */
 }
@@ -190,7 +153,7 @@ static void PrintfLogo(void)
     CPU_Sn1 = *(__IO uint32_t*)(0x1FFFF7E8 + 4);
     CPU_Sn2 = *(__IO uint32_t*)(0x1FFFF7E8 + 8);
 
-    printf("\r\nCPU : STM32H743XIH6, BGA240, 主频: %dMHz\r\n", SystemCoreClock / 1000000);
+    printf("\r\nCPU : STM32F103ZE, 主频: %dMHz\r\n", SystemCoreClock / 1000000);
     printf("UID = %08X %08X %08X\n\r", CPU_Sn2, CPU_Sn1, CPU_Sn0);
   }
 

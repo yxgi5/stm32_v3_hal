@@ -27,7 +27,7 @@ void bsp_Init(void)
   bsp_InitTimer();    /* 初始化滴答定时器 */
   bsp_InitUart();   /* 初始化串口 */
   bsp_InitLed();      /* 初始化LED */
-//  bsp_InitI2C2();
+  bsp_InitI2C1();
 }
 
 /**
