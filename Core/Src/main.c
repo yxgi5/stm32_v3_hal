@@ -71,35 +71,20 @@ static void PrintfHelp(void);
   */
 int main(void)
 {
-  uint8_t ucKeyCode;    /* 按键代码 */
-
   bsp_Init();
 
-  PrintfLogo(); /* 打印例程名称和版本等信息 */
-  PrintfHelp(); /* 打印操作提示 */
-
-  bsp_StartAutoTimer(0, 100); /* 启动1个100ms的自动重装的定时器，软件定时器0 */
-  bsp_StartAutoTimer(1, 100); /* 启动1个100ms的自动重装的定时器，软件定时器1 */
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  /* USER CODE BEGIN 2 */
+  BEEP_Start(50, 50, 5);
+  /* USER CODE END 2 */
 
   /* 进入主程序循环体 */
   while (1)
   {
-    uint8_t ctrl=1;
-      /* USER CODE END WHILE */
-    uint8_t tmp[40]={12,2,3,4,5,6,7,8,9,10,\
-    11,12,13,14,15,16,17,18,19,20,21,22,\
-    23,24,25,26,27,28,29,30,31,32,33,34,\
-    35,36,37,38,39,40};
-  //  ee_WriteBytes(&I2c1Handle, tmp,0,40);
-
-
-    uint8_t tmp1[120]={0};
-
-    ee_WriteBytes(&I2c1Handle, tmp, 78, sizeof(tmp));
-
-    HAL_Delay(100);
-    ee_ReadBytes(&I2c1Handle, tmp1, 0, sizeof(tmp1));
-    HAL_Delay(100);
+    /* USER CODE END WHILE */
+	
+    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
