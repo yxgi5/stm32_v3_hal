@@ -644,6 +644,7 @@ static void InitHardUart(void)
   /* 配置RX引脚 */
   GPIO_InitStruct.Pin = USART1_RX_PIN;
 //  GPIO_InitStruct.Alternate = USART1_RX_AF;
+  GPIO_InitStruct.Mode      = GPIO_MODE_INPUT;
   HAL_GPIO_Init(USART1_RX_GPIO_PORT, &GPIO_InitStruct);
 
   /* 配置NVIC the NVIC for UART */
@@ -678,6 +679,7 @@ static void InitHardUart(void)
   /* 配置RX引脚 */
   GPIO_InitStruct.Pin = USART2_RX_PIN;
 //  GPIO_InitStruct.Alternate = USART2_RX_AF;
+  GPIO_InitStruct.Mode      = GPIO_MODE_INPUT;
   HAL_GPIO_Init(USART2_RX_GPIO_PORT, &GPIO_InitStruct);
 
   /* 配置NVIC the NVIC for UART */
@@ -711,6 +713,7 @@ static void InitHardUart(void)
   /* 配置RX引脚 */
   GPIO_InitStruct.Pin = USART3_RX_PIN;
 //  GPIO_InitStruct.Alternate = USART3_RX_AF;
+  GPIO_InitStruct.Mode      = GPIO_MODE_INPUT;
   HAL_GPIO_Init(USART3_RX_GPIO_PORT, &GPIO_InitStruct);
 
   /* 配置NVIC the NVIC for UART */
@@ -744,6 +747,7 @@ static void InitHardUart(void)
   /* 配置RX引脚 */
   GPIO_InitStruct.Pin = UART4_RX_PIN;
 //  GPIO_InitStruct.Alternate = UART4_RX_AF;
+  GPIO_InitStruct.Mode      = GPIO_MODE_INPUT;
   HAL_GPIO_Init(UART4_RX_GPIO_PORT, &GPIO_InitStruct);
 
   /* 配置NVIC the NVIC for UART */
@@ -772,6 +776,7 @@ static void InitHardUart(void)
   GPIO_InitStruct.Pull      = GPIO_PULLUP;
   GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
 //  GPIO_InitStruct.Alternate = UART5_TX_AF;
+  GPIO_InitStruct.Mode      = GPIO_MODE_INPUT;
   HAL_GPIO_Init(UART5_TX_GPIO_PORT, &GPIO_InitStruct);
 
   /* 配置RX引脚 */
